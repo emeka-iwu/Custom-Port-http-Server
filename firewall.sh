@@ -1,4 +1,8 @@
 #!/bin/bash
+
+#Change file permision on script file to ensure it is executable
+chmod +x firewall.sh
+
 #Assign current zone to variable 
 zone=$(sudo firewall-cmd --get-active-zones | awk '{print $1}' | head -1)
 

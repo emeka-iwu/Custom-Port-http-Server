@@ -30,3 +30,7 @@ A minimal static web server built using Python's `http.server` module, running o
 
 ```bash
 python3 -m http.server 8080
+
+## Key Takeaway 
+
+Always check the active zone with sudo firewall-cmd --get-active-zones before adding ports, and use --zone=<zone-name> to ensure rules apply to the correct zone. This prevents the port from being added to an inactive zone, which won’t allow traffic.
