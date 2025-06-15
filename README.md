@@ -28,8 +28,8 @@ A minimal static web server built using Python's `http.server` module, running o
 
 3. To start the server, run:
 
-```bash
-python3 -m http.server 8080
+   ```bash
+   python3 -m http.server 8080
 
 ## Key Takeaway 
 
