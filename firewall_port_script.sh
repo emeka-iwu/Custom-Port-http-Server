@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Change file permision on script file to ensure it is executable (although redundant)
-chmod 700 firewall.sh
-
 # Assign input values to port number.
 while true; do
     read -p "Enter port number you wish to open: " PORT_NUMBER
@@ -29,16 +26,16 @@ done
 ZONE=$(sudo firewall-cmd --get-active-zones | awk '{print $1}' | head -1)
 PORTS=$(sudo firewall-cmd --zone=$ZONE --list-ports)
 
-#Check if port is already open in the current zone
+#Check if port is already open in the current zone, else open it
 if [[ "$PORTS" =~ $PORT_NUMBER/$PROTOCOL ]]; then
     echo "Port $PORT_NUMBER is already open in $ZONE zone"
     sudo firewall-cmd --list-ports --zone=$ZONE
     exit 0
 else
-    echo "Port $PORT_NUMBER is not open in zone $ZONE, adding it now..."
+    echo "Port $PORT_NUMBER is currently not open in zone $ZONE, adding it now..."
     sudo firewall-cmd --zone=$ZONE --add-port=$PORT_NUMBER/$PROTOCOL --permanent
     sudo firewall-cmd --reload
-    echo "Port $PORT_NUMBER is now open in $ZONE zone"
+    echo "Port $PORT_NUMBER/$PROTOCOL is now open in $ZONE zone"
 fi
 
 
